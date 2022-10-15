@@ -11,45 +11,24 @@ module.exports = {
       },
       full_name: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-          isEmail: true,
-        },
       },
       username: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       profile_image_url: {
         type: Sequelize.TEXT,
-        allowNull: false,
-        validate: {
-          isUrl: true,
-        },
       },
       age: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          isInt: true,
-        },
       },
       phone_number: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          isInt: true,
-        },
       },
       createdAt: {
         allowNull: false,
