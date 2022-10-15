@@ -1,3 +1,5 @@
+const { comparePassword } = require('../helpers/bcrypt');
+const generateToken = require('../helpers/jwt');
 const { User } = require('../models');
 
 class UserController {
@@ -24,10 +26,41 @@ class UserController {
       });
 
       res.status(201).json(userData);
-    } catch (err) {
+    } catch (error) {
       return res.status(400).json({
         // message: err.message,
-        sequelizeMessage: err.errors.map((e) => e.message),
+        message: error.errors.map((e) => e.message),
+      });
+    }
+  }
+
+  static async login(req, res) {
+    const { email, password } = req.body;
+
+    try {
+      const userData = await User.findOne({
+        where: {
+          email,
+        },
+      });
+
+      if (userData) {
+        const isCorrectPassword = comparePassword(password, userData.password);
+
+        if (isCorrectPassword) {
+          const payload = generateToken({});
+          res.status(200).json({ payload });
+        } else {
+          res.status(401).json({ message: 'Wrong Password' });
+        }
+      } else {
+        res
+          .status(401)
+          .json({ message: `User with email ${email}  not found` });
+      }
+    } catch (error) {
+      return res.status(400).json({
+        message: error.errors.map((e) => e.message),
       });
     }
   }
