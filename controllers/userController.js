@@ -1,5 +1,5 @@
 const { comparePassword } = require('../helpers/bcrypt');
-const generateToken = require('../helpers/jwt');
+const { generateToken } = require('../helpers/jwt');
 const { User } = require('../models');
 
 class UserController {
@@ -25,7 +25,7 @@ class UserController {
         phone_number,
       });
 
-      res.status(201).json(userData);
+      res.status(201).json({ user: userData });
     } catch (error) {
       return res.status(400).json({
         // message: err.message,
@@ -48,8 +48,8 @@ class UserController {
         const isCorrectPassword = comparePassword(password, userData.password);
 
         if (isCorrectPassword) {
-          const payload = generateToken({});
-          res.status(200).json({ payload });
+          const token = generateToken({});
+          res.status(200).json({ token });
         } else {
           res.status(401).json({ message: 'Wrong Password' });
         }
@@ -59,9 +59,37 @@ class UserController {
           .json({ message: `User with email ${email}  not found` });
       }
     } catch (error) {
-      return res.status(400).json({
-        message: error.errors.map((e) => e.message),
+      return res.status(400).json({ message: error.message });
+    }
+  }
+
+  static async updateUser(req, res) {
+    const id = +req.params.id;
+    const { email, full_name, username, profile_image_url, age, phone_number } =
+      req.body;
+    const data = {
+      email,
+      full_name,
+      username,
+      profile_image_url,
+      age,
+      phone_number,
+    };
+
+    console.log(id);
+
+    try {
+      const userData = await User.update(data, {
+        where: {
+          id,
+        },
+        returning: true,
       });
+
+      console.log(userData);
+      return res.status(200).json({ user: userData });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
     }
   }
 }
