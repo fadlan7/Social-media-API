@@ -6,7 +6,7 @@ async function authentication(req, res, next) {
     const token = req.get('token');
     const userDecoded = verifyToken(token);
 
-    console.log(userDecoded);
+    // console.log(userDecoded);
 
     await User.findOne({
       where: {

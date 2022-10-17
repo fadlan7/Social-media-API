@@ -1,10 +1,10 @@
 const { User } = require('../models');
 
 async function authorizationUser(req, res, next) {
-  const userId = req.params.id;
+  const userId = req.params.userId;
   const authenticatedUser = res.locals.user;
 
-  console.log(userId);
+  // console.log(userId);
 
   try {
     const findUser = await User.findOne({
@@ -13,7 +13,7 @@ async function authorizationUser(req, res, next) {
       },
     });
 
-    console.log(findUser);
+    // console.log(findUser);
 
     if (!findUser) {
       return res

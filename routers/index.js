@@ -8,7 +8,9 @@ router.post('/users/register', UserController.register);
 router.post('/users/login', UserController.login);
 
 router.use(authentication);
-router.use('/users/:id', authorizationUser);
-router.put('/users/:id', UserController.updateUser);
+router.use('/users/:userId', authorizationUser);
+
+router.put('/users/:userId', UserController.updateUser);
+router.delete('/users/:userId', UserController.deleteUser);
 
 module.exports = router;

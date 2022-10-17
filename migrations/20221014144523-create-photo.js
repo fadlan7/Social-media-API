@@ -11,18 +11,12 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       caption: {
         type: Sequelize.TEXT,
-        allowNull: false,
       },
       poster_image_url: {
         type: Sequelize.TEXT,
-        allowNull: false,
-        validate: {
-          isUrl: true,
-        },
       },
       UserId: {
         type: Sequelize.INTEGER,

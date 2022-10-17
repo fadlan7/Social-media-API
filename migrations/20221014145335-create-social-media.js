@@ -11,11 +11,9 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       social_media_url: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       UserId: {
         type: Sequelize.INTEGER,

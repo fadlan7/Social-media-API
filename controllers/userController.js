@@ -28,8 +28,8 @@ class UserController {
       res.status(201).json({ user: userData });
     } catch (error) {
       return res.status(400).json({
-        // message: err.message,
-        message: error.errors.map((e) => e.message),
+        message: error.message,
+        // message: error.errors.map((e) => e.message),
       });
     }
   }
@@ -48,7 +48,11 @@ class UserController {
         const isCorrectPassword = comparePassword(password, userData.password);
 
         if (isCorrectPassword) {
-          const token = generateToken({});
+          const token = generateToken({
+            id: userData.id,
+            email: userData.email,
+            username: userData.username,
+          });
           res.status(200).json({ token });
         } else {
           res.status(401).json({ message: 'Wrong Password' });
@@ -65,8 +69,9 @@ class UserController {
 
   static async updateUser(req, res) {
     const id = +req.params.id;
-    const { email, full_name, username, profile_image_url, age, phone_number } =
-      req.body;
+    const { email, full_name, username, profile_image_url } = req.body;
+    const { age, phone_number } = +req.body;
+
     const data = {
       email,
       full_name,
@@ -76,7 +81,7 @@ class UserController {
       phone_number,
     };
 
-    console.log(id);
+    // console.log(id);
 
     try {
       const userData = await User.update(data, {
@@ -86,8 +91,22 @@ class UserController {
         returning: true,
       });
 
-      console.log(userData);
+      // console.log(userData);
       return res.status(200).json({ user: userData });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
+
+  static async deleteUser(req, res) {
+    const id = +req.params.id;
+
+    try {
+      const userData = await User.destroy({ where: id });
+
+      return res
+        .status(200)
+        .json({ message: 'Your account has been successfully deleted' });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }

@@ -56,14 +56,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: { args: true, msg: 'Age is required' },
-          isInt: { args: true, msg: 'Is not a number on age' },
+          isInt: { args: true, msg: 'Is not a integer on age' },
         },
       },
       phone_number: {
         type: DataTypes.INTEGER,
         validate: {
           notEmpty: { args: true, msg: 'Age is required' },
-          isInt: { args: true, msg: 'Is not a number on phone number' },
+          isInt: { args: true, msg: 'Is not a integer on phone number' },
         },
       },
     },
