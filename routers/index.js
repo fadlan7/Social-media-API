@@ -8,9 +8,12 @@ router.post('/users/register', UserController.register);
 router.post('/users/login', UserController.login);
 
 router.use(authentication);
-router.use('/users/:userId', authorizationUser);
 
+router.use('/users/:userId', authorizationUser);
 router.put('/users/:userId', UserController.updateUser);
 router.delete('/users/:userId', UserController.deleteUser);
+
+// router.use('/photos/:')
+router.post('/photos', PhotoController.createPhoto);
 
 module.exports = router;
