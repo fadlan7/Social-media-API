@@ -39,6 +39,25 @@ class CommentController {
       return res.status(500).json({ message: error.message });
     }
   }
+
+  static async updateComment(req, res) {
+    const id = +req.params.commentId;
+    const { comment } = req.body;
+    const data = { comment };
+
+    try {
+      const commentData = await Comment.update(data, {
+        where: { id },
+        returning: true,
+        // plain: true,
+        // nest: true,
+      });
+
+      return res.status(200).json(commentData);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = CommentController;
