@@ -34,6 +34,7 @@ class PhotoController {
             attributes: ['id', 'username', 'profile_image_url'],
           },
         ],
+        order: [['id', 'ASC']],
       });
       //   { include: [Comment, User] }
       return res.status(200).json({ photos: photoDatas });

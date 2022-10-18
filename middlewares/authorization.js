@@ -52,7 +52,7 @@ async function authorizationPhoto(req, res, next) {
     if (!findPhoto) {
       return res
         .status(404)
-        .json({ message: `User with id ${photoId} not found` });
+        .json({ message: `Photo with id ${photoId} not found` });
     }
 
     if (findPhoto.UserId === authenticatedUser.id) {

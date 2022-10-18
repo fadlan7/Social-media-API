@@ -72,7 +72,7 @@ class UserController {
   }
 
   static async updateUser(req, res) {
-    const id = +req.params.id;
+    const id = +req.params.userId;
     const { email, full_name, username, profile_image_url, age, phone_number } =
       req.body;
     // const { age, phone_number } = +req.body;
@@ -90,7 +90,7 @@ class UserController {
       phone_number: phoneInt,
     };
 
-    console.log(data);
+    // console.log(data);
 
     try {
       const userData = await User.update(data, {
@@ -100,18 +100,22 @@ class UserController {
         returning: true,
       });
 
-      // console.log(userData);
-      return res.status(200).json({ user: userData });
+      console.log(userData);
+      return res.status(200).json(userData);
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
   }
 
   static async deleteUser(req, res) {
-    const id = +req.params.id;
+    const id = +req.params.userId;
 
     try {
-      await User.destroy({ where: { id } });
+      await User.destroy({
+        where: { id },
+        // truncate: { cascade: true },
+        // restartIdentity: true,
+      });
 
       return res
         .status(200)
