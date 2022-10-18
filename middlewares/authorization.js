@@ -1,4 +1,4 @@
-const { User, Photo } = require('../models');
+const { User, Photo, Comment } = require('../models');
 
 async function authorizationUser(req, res, next) {
   const userId = req.params.userId;
@@ -67,4 +67,42 @@ async function authorizationPhoto(req, res, next) {
   }
 }
 
-module.exports = { authorizationUser, authorizationPhoto };
+async function authorizationComment(req, res, next) {
+  const commentId = req.params.commentId;
+  const authenticatedUser = res.locals.user;
+
+  // console.log(commentId);
+  // console.log(authenticatedUser.id);
+
+  try {
+    const findComment = await Comment.findOne({
+      where: {
+        id: commentId,
+      },
+    });
+
+    // console.log(findComment.UserId);
+
+    if (!findComment) {
+      return res
+        .status(404)
+        .json({ message: `Comment with id ${commentId} not found` });
+    }
+
+    if (findComment.UserId === authenticatedUser.id) {
+      return next();
+    } else {
+      return res.status(403).json({
+        message: `User with email ${authenticatedUser.email} does not have permission to access comment with id ${commentId} `,
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = {
+  authorizationUser,
+  authorizationPhoto,
+  authorizationComment,
+};

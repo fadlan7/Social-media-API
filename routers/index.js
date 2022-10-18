@@ -8,6 +8,7 @@ const authentication = require('../middlewares/authentication');
 const {
   authorizationUser,
   authorizationPhoto,
+  authorizationComment,
 } = require('../middlewares/authorization');
 
 router.post('/users/register', UserController.register);
@@ -28,5 +29,9 @@ router.delete('/photos/:photoId', PhotoController.deletePhoto);
 
 router.post('/comments', CommentController.createComment);
 router.get('/comments', CommentController.getAllComments);
+
+router.use('/comments/:commentId', authorizationComment);
+router.put('/comments/:commentId', CommentController.updateComment);
+// router.delete('/photos/:photoId', PhotoController.deletePhoto);
 
 module.exports = router;
