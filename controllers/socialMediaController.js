@@ -35,6 +35,23 @@ class SocialMediaController {
       return res.status(500).json({ message: error.message });
     }
   }
+
+  static async updateSocmed(req, res) {
+    const id = +req.params.socialMediaId;
+    const { name, social_media_url } = req.body;
+    const data = { name, social_media_url };
+
+    try {
+      const socmedData = await SocialMedia.update(data, {
+        where: { id },
+        returning: true,
+      });
+
+      return res.status(200).json({ social_media: socmedData });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = SocialMediaController;
