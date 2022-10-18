@@ -15,5 +15,6 @@ router.delete('/users/:userId', UserController.deleteUser);
 
 // router.use('/photos/:')
 router.post('/photos', PhotoController.createPhoto);
+router.get('/photos', PhotoController.getAllPhotos);
 
 module.exports = router;

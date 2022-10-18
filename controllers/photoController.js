@@ -1,4 +1,4 @@
-const { Photo } = require('../models');
+const { Photo, User, Comment, Sequelize } = require('../models');
 
 class PhotoController {
   static async createPhoto(req, res) {
@@ -15,7 +15,28 @@ class PhotoController {
         UserId: userId,
       });
 
-      return res.status(201).json({ photoData });
+      return res.status(201).json(photoData);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
+
+  static async getAllPhotos(req, res) {
+    try {
+      const photoDatas = await Photo.findAll({
+        include: [
+          {
+            model: Comment,
+            attributes: ['comment'],
+          },
+          {
+            model: User,
+            attributes: ['id', 'username', 'profile_image_url'],
+          },
+        ],
+      });
+      //   { include: [Comment, User] }
+      return res.status(200).json({ photos: photoDatas });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }
