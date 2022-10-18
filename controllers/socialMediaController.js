@@ -14,6 +14,15 @@ class SocialMediaController {
 
       return res.status(201).json(socmedData);
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }
@@ -32,6 +41,15 @@ class SocialMediaController {
 
       return res.status(200).json({ social_medias: socmedDatas });
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }
@@ -49,6 +67,15 @@ class SocialMediaController {
 
       return res.status(200).json({ social_media: socmedData });
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }
@@ -63,6 +90,15 @@ class SocialMediaController {
         .status(200)
         .json({ message: 'Your social media has been successfully deleted' });
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }

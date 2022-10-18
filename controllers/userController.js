@@ -27,10 +27,16 @@ class UserController {
 
       res.status(201).json({ user: userData });
     } catch (error) {
-      return res.status(400).json({
-        message: error.message,
-        // message: error.errors.map((e) => e.message),
-      });
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
+      return res.status(500).json({ message: error.message });
     }
   }
 
@@ -63,7 +69,16 @@ class UserController {
           .json({ message: `User with email ${email}  not found` });
       }
     } catch (error) {
-      return res.status(400).json({ message: error.message });
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
+      return res.status(500).json({ message: error.message });
     }
   }
 
@@ -94,6 +109,15 @@ class UserController {
       console.log(userData);
       return res.status(200).json(userData);
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }
@@ -112,6 +136,15 @@ class UserController {
         .status(200)
         .json({ message: 'Your account has been successfully deleted' });
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }

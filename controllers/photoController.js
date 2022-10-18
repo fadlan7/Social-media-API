@@ -17,6 +17,15 @@ class PhotoController {
 
       return res.status(201).json(photoData);
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }
@@ -40,6 +49,15 @@ class PhotoController {
       //   { include: [Comment, User] }
       return res.status(200).json({ photos: photoDatas });
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }
@@ -59,6 +77,15 @@ class PhotoController {
 
       return res.status(200).json({ photo: photoData });
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }
@@ -73,6 +100,15 @@ class PhotoController {
         .status(200)
         .json({ message: 'Your photo has been successfully deleted' });
     } catch (error) {
+      if (
+        error.name === 'SequelizeValidationError' ||
+        error.name === 'SequelizeUniqueConstraintError'
+      ) {
+        return res.status(400).json({
+          message: error.errors.map((e) => e.message),
+        });
+      }
+
       return res.status(500).json({ message: error.message });
     }
   }
