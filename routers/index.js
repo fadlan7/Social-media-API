@@ -36,5 +36,6 @@ router.put('/comments/:commentId', CommentController.updateComment);
 router.delete('/comments/:commentId', CommentController.deleteComment);
 
 router.post('/socialmedias', SocialMediaController.createSocmed);
+router.get('/socialmedias', SocialMediaController.getAllSocmed);
 
 module.exports = router;
