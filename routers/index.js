@@ -41,6 +41,9 @@ router.get('/socialmedias', SocialMediaController.getAllSocmed);
 
 router.use('/socialmedias/:socialMediaId', authorizationSocmed);
 router.put('/socialmedias/:socialMediaId', SocialMediaController.updateSocmed);
-// router.delete('/comments/:commentId', CommentController.deleteComment);
+router.delete(
+  '/socialmedias/:socialMediaId',
+  SocialMediaController.deleteSocmed
+);
 
 module.exports = router;

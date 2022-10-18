@@ -52,6 +52,20 @@ class SocialMediaController {
       return res.status(500).json({ message: error.message });
     }
   }
+
+  static async deleteSocmed(req, res) {
+    const id = +req.params.socialMediaId;
+
+    try {
+      await SocialMedia.destroy({ where: { id } });
+
+      return res
+        .status(200)
+        .json({ message: 'Your social media has been successfully deleted' });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = SocialMediaController;
