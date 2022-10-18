@@ -41,6 +41,25 @@ class PhotoController {
       return res.status(500).json({ message: error.message });
     }
   }
+
+  static async updatePhoto(req, res) {
+    const id = +req.params.photoId;
+    const { title, caption, poster_image_url } = req.body;
+    const data = { title, caption, poster_image_url };
+
+    try {
+      const photoData = await Photo.update(data, {
+        where: { id },
+        returning: true,
+      });
+
+      console.log(photoData);
+
+      return res.status(200).json({ photo: photoData });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = PhotoController;
