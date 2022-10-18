@@ -1,6 +1,6 @@
 const { comparePassword } = require('../helpers/bcrypt');
 const { generateToken } = require('../helpers/jwt');
-const { User, sequelize } = require('../models');
+const { User } = require('../models');
 
 class UserController {
   static async register(req, res) {
@@ -14,10 +14,6 @@ class UserController {
       phone_number,
     } = req.body;
 
-    // console.log(typeof age);
-    const ageInt = parseInt(age);
-    const phoneInt = parseInt(phone_number);
-
     try {
       const userData = await User.create({
         email,
@@ -25,8 +21,8 @@ class UserController {
         username,
         password,
         profile_image_url,
-        age: ageInt,
-        phone_number: phoneInt,
+        age: +age,
+        phone_number: +phone_number,
       });
 
       res.status(201).json({ user: userData });
@@ -75,19 +71,14 @@ class UserController {
     const id = +req.params.userId;
     const { email, full_name, username, profile_image_url, age, phone_number } =
       req.body;
-    // const { age, phone_number } = +req.body;
-    // console.log(typeof age);
-
-    const ageInt = parseInt(age);
-    const phoneInt = parseInt(phone_number);
 
     const data = {
       email,
       full_name,
       username,
       profile_image_url,
-      age: ageInt,
-      phone_number: phoneInt,
+      age: +age,
+      phone_number: +phone_number,
     };
 
     // console.log(data);
