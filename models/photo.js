@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Photo extends Model {
     /**
@@ -10,17 +8,38 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      this.belongsTo(models.User);
+
+      this.hasMany(models.Comment);
     }
   }
-  Photo.init({
-    title: DataTypes.STRING,
-    caption: DataTypes.TEXT,
-    poster_image_url: DataTypes.TEXT,
-    UserId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Photo',
-  });
+  Photo.init(
+    {
+      title: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: { args: true, msg: 'Title is required' },
+        },
+      },
+      caption: {
+        type: DataTypes.TEXT,
+        validate: {
+          notEmpty: { args: true, msg: 'Caption is required' },
+        },
+      },
+      poster_image_url: {
+        type: DataTypes.TEXT,
+        validate: {
+          notEmpty: { args: true, msg: 'Poster image url is required' },
+          isUrl: { args: true, msg: 'Invalid URL format' },
+        },
+      },
+      UserId: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: 'Photo',
+    }
+  );
   return Photo;
 };

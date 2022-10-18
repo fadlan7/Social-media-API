@@ -11,7 +11,6 @@ async function authentication(req, res, next) {
     await User.findOne({
       where: {
         id: userDecoded.id,
-        email: userDecoded.email,
       },
     })
       .then((userData) => {

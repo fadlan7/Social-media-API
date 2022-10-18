@@ -1,6 +1,6 @@
 const { comparePassword } = require('../helpers/bcrypt');
 const { generateToken } = require('../helpers/jwt');
-const { User } = require('../models');
+const { User, sequelize } = require('../models');
 
 class UserController {
   static async register(req, res) {
@@ -14,6 +14,10 @@ class UserController {
       phone_number,
     } = req.body;
 
+    // console.log(typeof age);
+    const ageInt = parseInt(age);
+    const phoneInt = parseInt(phone_number);
+
     try {
       const userData = await User.create({
         email,
@@ -21,8 +25,8 @@ class UserController {
         username,
         password,
         profile_image_url,
-        age,
-        phone_number,
+        age: ageInt,
+        phone_number: phoneInt,
       });
 
       res.status(201).json({ user: userData });
@@ -69,19 +73,24 @@ class UserController {
 
   static async updateUser(req, res) {
     const id = +req.params.id;
-    const { email, full_name, username, profile_image_url } = req.body;
-    const { age, phone_number } = +req.body;
+    const { email, full_name, username, profile_image_url, age, phone_number } =
+      req.body;
+    // const { age, phone_number } = +req.body;
+    // console.log(typeof age);
+
+    const ageInt = parseInt(age);
+    const phoneInt = parseInt(phone_number);
 
     const data = {
       email,
       full_name,
       username,
       profile_image_url,
-      age,
-      phone_number,
+      age: ageInt,
+      phone_number: phoneInt,
     };
 
-    // console.log(id);
+    console.log(data);
 
     try {
       const userData = await User.update(data, {
@@ -102,7 +111,7 @@ class UserController {
     const id = +req.params.id;
 
     try {
-      const userData = await User.destroy({ where: id });
+      await User.destroy({ where: { id } });
 
       return res
         .status(200)
