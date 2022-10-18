@@ -1,4 +1,4 @@
-const { User, Photo, Comment } = require('../models');
+const { User, Photo, Comment, SocialMedia } = require('../models');
 
 async function authorizationUser(req, res, next) {
   const userId = req.params.userId;
@@ -101,8 +101,40 @@ async function authorizationComment(req, res, next) {
   }
 }
 
+async function authorizationSocmed(req, res, next) {
+  const socmedId = req.params.socialMediaId;
+  const authenticatedUser = res.locals.user;
+
+  try {
+    const findSocmed = await SocialMedia.findOne({
+      where: {
+        id: socmedId,
+      },
+    });
+
+    // console.log(findSocmed.UserId);
+
+    if (!findSocmed) {
+      return res
+        .status(404)
+        .json({ message: `Social media with id ${socmedId} not found` });
+    }
+
+    if (findSocmed.UserId === authenticatedUser.id) {
+      return next();
+    } else {
+      return res.status(403).json({
+        message: `User with email ${authenticatedUser.email} does not have permission to access social media with id ${socmedId} `,
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+}
+
 module.exports = {
   authorizationUser,
   authorizationPhoto,
   authorizationComment,
+  authorizationSocmed,
 };

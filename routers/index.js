@@ -10,6 +10,7 @@ const {
   authorizationUser,
   authorizationPhoto,
   authorizationComment,
+  authorizationSocmed,
 } = require('../middlewares/authorization');
 
 router.post('/users/register', UserController.register);
@@ -37,5 +38,9 @@ router.delete('/comments/:commentId', CommentController.deleteComment);
 
 router.post('/socialmedias', SocialMediaController.createSocmed);
 router.get('/socialmedias', SocialMediaController.getAllSocmed);
+
+router.use('/socialmedias/:socialMediaId', authorizationSocmed);
+// router.put('/comments/:commentId', CommentController.updateComment);
+// router.delete('/comments/:commentId', CommentController.deleteComment);
 
 module.exports = router;
