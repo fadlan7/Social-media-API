@@ -1,11 +1,11 @@
-const { Photo, User, Comment, Sequelize } = require('../models');
+const { Photo, User, Comment } = require('../models');
 
 class PhotoController {
   static async createPhoto(req, res) {
     const { title, caption, poster_image_url } = req.body;
     const userId = res.locals.user.id;
 
-    console.log(userId);
+    // console.log(userId);
 
     try {
       const photoData = await Photo.create({
@@ -28,6 +28,7 @@ class PhotoController {
           {
             model: Comment,
             attributes: ['comment'],
+            include: [{ model: User, attributes: ['username'] }],
           },
           {
             model: User,

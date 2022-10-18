@@ -1,5 +1,9 @@
 const router = require('express').Router();
-const { UserController, PhotoController } = require('../controllers');
+const {
+  UserController,
+  PhotoController,
+  CommentController,
+} = require('../controllers');
 const authentication = require('../middlewares/authentication');
 const {
   authorizationUser,
@@ -21,5 +25,8 @@ router.get('/photos', PhotoController.getAllPhotos);
 router.use('/photos/:photoId', authorizationPhoto);
 router.put('/photos/:photoId', PhotoController.updatePhoto);
 router.delete('/photos/:photoId', PhotoController.deletePhoto);
+
+router.post('/comments', CommentController.createComment);
+// router.get('/photos', PhotoController.getAllPhotos);
 
 module.exports = router;
