@@ -20,5 +20,6 @@ router.get('/photos', PhotoController.getAllPhotos);
 
 router.use('/photos/:photoId', authorizationPhoto);
 router.put('/photos/:photoId', PhotoController.updatePhoto);
+router.delete('/photos/:photoId', PhotoController.deletePhoto);
 
 module.exports = router;

@@ -61,6 +61,20 @@ class PhotoController {
       return res.status(500).json({ message: error.message });
     }
   }
+
+  static async deletePhoto(req, res) {
+    const id = +req.params.photoId;
+
+    try {
+      await Photo.destroy({ where: { id } });
+
+      return res
+        .status(200)
+        .json({ message: 'Your photo has been successfully deleted' });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = PhotoController;
