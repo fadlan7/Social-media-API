@@ -25,7 +25,16 @@ class UserController {
         phone_number: +phone_number,
       });
 
-      res.status(201).json({ user: userData });
+      const dataDisplay = {
+        email,
+        full_name,
+        username,
+        profile_image_url,
+        age,
+        phone_number,
+      };
+
+      res.status(201).json({ user: dataDisplay });
     } catch (error) {
       if (
         error.name === 'SequelizeValidationError' ||
@@ -96,8 +105,6 @@ class UserController {
       phone_number: +phone_number,
     };
 
-    // console.log(data);
-
     try {
       const userData = await User.update(data, {
         where: {
@@ -106,8 +113,17 @@ class UserController {
         returning: true,
       });
 
-      console.log(userData);
-      return res.status(200).json(userData);
+      const dataDisplay = {
+        email,
+        full_name,
+        username,
+        profile_image_url,
+        age,
+        phone_number,
+      };
+
+      // console.log(userData);
+      return res.status(200).json({ user: dataDisplay });
     } catch (error) {
       if (
         error.name === 'SequelizeValidationError' ||
