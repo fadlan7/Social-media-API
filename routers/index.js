@@ -3,6 +3,7 @@ const {
   UserController,
   PhotoController,
   CommentController,
+  SocialMediaController,
 } = require('../controllers');
 const authentication = require('../middlewares/authentication');
 const {
@@ -33,5 +34,7 @@ router.get('/comments', CommentController.getAllComments);
 router.use('/comments/:commentId', authorizationComment);
 router.put('/comments/:commentId', CommentController.updateComment);
 router.delete('/comments/:commentId', CommentController.deleteComment);
+
+router.post('/socialmedias', SocialMediaController.createSocmed);
 
 module.exports = router;
