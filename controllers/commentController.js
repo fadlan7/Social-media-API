@@ -58,6 +58,20 @@ class CommentController {
       return res.status(500).json({ message: error.message });
     }
   }
+
+  static async deleteComment(req, res) {
+    const id = +req.params.commentId;
+
+    try {
+      await Comment.destroy({ where: { id } });
+
+      return res
+        .status(200)
+        .json({ message: 'Your comment has been successfully deleted' });
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 module.exports = CommentController;

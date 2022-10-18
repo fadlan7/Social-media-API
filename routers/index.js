@@ -32,6 +32,6 @@ router.get('/comments', CommentController.getAllComments);
 
 router.use('/comments/:commentId', authorizationComment);
 router.put('/comments/:commentId', CommentController.updateComment);
-// router.delete('/photos/:photoId', PhotoController.deletePhoto);
+router.delete('/comments/:commentId', CommentController.deleteComment);
 
 module.exports = router;
