@@ -8,11 +8,11 @@ class CommentController {
     try {
       const commentData = await Comment.create({
         comment,
-        PhotoId,
         UserId: userId,
+        PhotoId,
       });
 
-      return res.status(201).json(commentData);
+      return res.status(201).json({ comment: commentData });
     } catch (error) {
       if (
         error.name === 'SequelizeValidationError' ||
@@ -71,7 +71,7 @@ class CommentController {
         // nest: true,
       });
 
-      return res.status(200).json(commentData);
+      return res.status(200).json({ comment: commentData });
     } catch (error) {
       if (
         error.name === 'SequelizeValidationError' ||
