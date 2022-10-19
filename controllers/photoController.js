@@ -5,8 +5,6 @@ class PhotoController {
     const { title, caption, poster_image_url } = req.body;
     const userId = res.locals.user.id;
 
-    // console.log(userId);
-
     try {
       const photoData = await Photo.create({
         title,
@@ -15,7 +13,17 @@ class PhotoController {
         UserId: userId,
       });
 
-      return res.status(201).json(photoData);
+      const idPhoto = +photoData.id;
+      const idUser = +photoData.UserId;
+      const dataDisplay = {
+        id: idPhoto,
+        poster_image_url,
+        title,
+        caption,
+        UserId: idUser,
+      };
+
+      return res.status(201).json(dataDisplay);
     } catch (error) {
       if (
         error.name === 'SequelizeValidationError' ||
@@ -63,7 +71,7 @@ class PhotoController {
   }
 
   static async updatePhoto(req, res) {
-    const id = +req.params.photoId;
+    let id = +req.params.photoId;
     const { title, caption, poster_image_url } = req.body;
     const data = { title, caption, poster_image_url };
 
@@ -71,9 +79,21 @@ class PhotoController {
       const photoData = await Photo.update(data, {
         where: { id },
         returning: true,
+        // raw: true,
+        // nest: true,
       });
 
-      console.log(photoData);
+      const { UserId, createdAt, updatedAt } = photoData;
+      const dataDisplay = {
+        id,
+        title,
+        caption,
+        poster_image_url,
+        UserId,
+        createdAt,
+        updatedAt,
+      };
+      console.log(dataDisplay);
 
       return res.status(200).json({ photo: photoData });
     } catch (error) {
