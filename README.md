@@ -228,7 +228,7 @@ Code: 200
 
 Code: 201
 
-![response edit user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-user.png)
+![response upload photo success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/upload-photo.png)
 
 -  **Error response:**
 
@@ -272,7 +272,7 @@ Code: 201
 
 Code: 200
 
-![response delete user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/delete-user.png)
+![response get all photos success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/get-all-photos.png)
 
 -  **Error response:**
 
@@ -309,7 +309,7 @@ Code: 200
 
 Code: 200
 
-![response edit user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-user.png)
+![response edit one photo success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-photo.png)
 
 -  **Error response:**
 
@@ -352,7 +352,7 @@ Code: 200
 
 Code: 200
 
-![response edit user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-user.png)
+![response delete one photo success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/delete-photo.png)
 
 -  **Error response:**
 
@@ -394,7 +394,7 @@ Code: 200
 
 Code: 201
 
-![response edit user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-user.png)
+![response create a comment success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/create-comment.png)
 
 -  **Error response:**
 
@@ -438,7 +438,7 @@ Code: 201
 
 Code: 200
 
-![response delete user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/delete-user.png)
+![response get all comments success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/get-comments.png)
 
 -  **Error response:**
 
@@ -475,7 +475,7 @@ Code: 200
 
 Code: 200
 
-![response edit user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-user.png)
+![response edit one comment success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-comment.png)
 
 -  **Error response:**
 
@@ -518,7 +518,7 @@ Code: 200
 
 Code: 200
 
-![response edit user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-user.png)
+![response delete one comment success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/delete-comment.png)
 
 -  **Error response:**
 
@@ -559,7 +559,7 @@ Code: 200
 
 Code: 201
 
-![response edit user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-user.png)
+![response create social media success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/create-socmed.png)
 
 -  **Error response:**
 
@@ -603,7 +603,7 @@ Code: 201
 
 Code: 200
 
-![response delete user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/delete-user.png)
+![response get all social medias success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/get-socialmedias.png)
 
 -  **Error response:**
 
@@ -640,7 +640,7 @@ Code: 200
 
 Code: 200
 
-![response edit user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-user.png)
+![response edit one social media success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-socmed.png)
 
 -  **Error response:**
 
@@ -683,7 +683,7 @@ Code: 200
 
 Code: 200
 
-![response edit user success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/edit-user.png)
+![response delete one social media success](https://github.com/fadlan7/final-project2/blob/main/postmanResult/create-socmed.png)
 
 -  **Error response:**
 
