@@ -15,7 +15,7 @@ async function authentication(req, res, next) {
     })
       .then((userData) => {
         if (!userData) {
-          return res.status(401).json({
+          return res.status(404).json({
             message: `User with email ${userDecoded.email} not found in database`,
           });
         }
