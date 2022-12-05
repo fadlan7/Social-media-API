@@ -21,7 +21,7 @@
 
 	npx sequelize db:create
 
-*before creating the database make sure to check the database configuration here: [Database configuration link](https://github.com/fadlan7/final-project2/tree/main/config)
+*before creating the database make sure to check the database configuration here: [Database configuration link](https://github.com/fadlan7/final-project2/blob/main/config/config.json)
 
 -  **Migrate all table to database:**
 
